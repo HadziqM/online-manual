@@ -1,4 +1,10 @@
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . "/manual/assets/inc/ja/basic.php" ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . "/manual/assets/inc/ja/basic.php";
+// トップ画像PCランダム表示
+$imgs = ["bg1", "bg2", "bg3", "bg4"];
+$count = count($imgs);
+$num = rand(0, $count - 1);
+$imgsrc = $imgs[$num];
+?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -20,7 +26,11 @@
     <!-- <link rel="alternate" href="http://.com/en/" hreflang="en">
   <link rel="alternate" href="http://.com/ja/" hreflang="ja"> -->
     <!-- css -->
-    <link href="<?= $css_path . "style.css"; ?>" rel="stylesheet" type="text/css">
+    <link href="/manual/assets/css/style.css?t=<?= print date("Ymd", filemtime($_SERVER['DOCUMENT_ROOT'] . $css_path . "style.css")); ?>" rel="stylesheet" type="text/css">
+    <!-- js -->
+    <script src="<?= $js_path . "jquery-3.6.1.min.js"; ?>" defer></script>
+    <script src="<?= $js_path . "js.cookie.min.js"; ?>" defer></script>
+    <script src="/manual/assets/js/main.js?t=<?= print date("Ymd", filemtime($_SERVER['DOCUMENT_ROOT'] . $js_path . "main.js")); ?>" defer></script>
     <!-- font -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Noto+Sans:wght@400;700;900&display=swap');
@@ -38,33 +48,52 @@
         </header>
 
         <div class="top_images">
-            <img class="bg" src="" alt="トップ画像">
+            <picture>
+                <source srcset="/manual/assets/img/common/<?= $imgsrc; ?>_sp.webp" media="(max-width: 899px)" type="image/webp">
+                <img class="top_img" src="/manual/assets/img/common/<?= $imgsrc; ?>.webp" alt="top_pc">
+            </picture>
         </div>
 
-        <main class="main_inner">
-            <nav class="side_menu">
-                <!-- menu -->
-                <?php require_once $_SERVER['DOCUMENT_ROOT'] . $inc_path . "ja/menu.php" ?>
-            </nav>
 
-            <article class="contents">
-                <!-- article -->
-                <?php require_once "./top.php" ?>
-            </article>
-        </main>
 
-        <div class="pagetop">▲</div>
+        <div class="bg">
+            <main class="main_inner">
+                <nav class="side_menu">
+                    <!-- menu -->
+                    <?php require_once $_SERVER['DOCUMENT_ROOT'] . $inc_path . "ja/menu.php" ?>
+                </nav>
+
+                <article class="contents">
+                    <!-- article -->
+                    <?php require_once "./top.php" ?>
+                </article>
+            </main>
+        </div>
+
+        <div class="pagetop"></div>
+
+        <ul class="bottom_navigations">
+            <!-- アイコン1つ目-->
+            <li class="openbtn">
+                <span class="mini-text">トップページ</span>
+            </li>
+
+            <!-- アイコン2つ目-->
+            <li class="openbtn">
+                <span class="mini-text">言語選択</span>
+            </li>
+
+            <!-- アイコン3つ目 Bookmark -->
+            <li class="openbtn">
+                <span class="mini-text">メニュー</span>
+            </li>
+        </ul>
 
         <footer>
             <!-- footer -->
             <?php require_once $_SERVER['DOCUMENT_ROOT'] . $inc_path . "ja/footer.php" ?>
         </footer>
     </div>
-    <!-- js -->
-    <script src="<?= $js_path . "jquery-3.6.1.min.js"; ?>"></script>
-    <script src="<?= $js_path . "import.js"; ?>"></script>
-    <script src="<?= $js_path . "main.js"; ?>"></script>
-    <script src="<?= $js_path . "js.cookie.min.js"; ?>"></script>
 </body>
 
 </html>

@@ -6,3 +6,4 @@ ErrorDocument 404 /manual/errors/404.php
 
 Require all denied
 Require local
+Require ip 192.168.11.5

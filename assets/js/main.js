@@ -25,14 +25,16 @@ root_el.addEventListener(
 /*=========================================================
 　　　　　トップページ画像
 =======================================================*/
-const bg = doc.querySelector('.bg');
-const arr_bg = ['bg1', 'bg2', 'bg3', 'bg4'];
-const path_imgcommon = '../assets/img/common/';
-const bg_random = arr_bg[Math.floor(Math.random() * arr_bg.length)];
-
-if (bg) {
-  bg.src = path_imgcommon + bg_random + '.webp';
-}
+/* let randomImg = [
+  '/manual/assets/img/common/bg1.webp',
+  '/manual/assets/img/common/bg2.webp',
+  '/manual/assets/img/common/bg3.webp',
+  '/manual/assets/img/common/bg4.webp',
+];
+let num = Math.floor(Math.random() * randomImg.length);
+let output = '<img class="bg" src=' + randomImg[num] + ' alt=>';
+let img = document.getElementById('images');
+img.innerHTML = output; */
 
 /*=========================================================
 　　　　　言語関連
@@ -48,9 +50,9 @@ const la = doc.querySelector('.language_selectArea'); // 言語選択欄
 const lj = doc.querySelector('.lang_sel_judge');
 const sl = doc.getElementById(lang_value); // 言語欄内より表示言語と一致するもの
 // ハッシュ削除
-const removeHash = () => {
+function removeHash() {
   history.pushState('', doc.title, path_name + location.search);
-};
+}
 
 /* 選択中言語装飾
 ====================================================*/
@@ -109,6 +111,47 @@ doc.querySelectorAll('.LANG').forEach((langQuery) => {
 let menuNow = '';
 const menuBtns = doc.querySelectorAll('.category');
 
+$('.openbtn').click(function () {
+  //ボタンがクリックされたら
+  $(this).toggleClass('active'); //ボタン自身に activeクラスを付与し
+  $('html').toggleClass('fixed');
+  $('.side_menu').toggleClass('panelactive'); //ナビゲーションにpanelactiveクラスを付与
+});
+
+/* スライドオープン
+====================================================*/
+function slideDown(target) {
+  target.style.height = 'auto';
+  let h = target.offsetHeight;
+  target.style.height = h + 'px';
+  target.animate(
+    {
+      height: [0, h + 'px'],
+    },
+    {
+      duration: 400,
+      easing: 'ease',
+    }
+  );
+}
+
+/* スライドクローズ
+====================================================*/
+function slideUp(target) {
+  let h = target.offsetHeight;
+  target.style.height = h + 'px';
+  target.animate(
+    {
+      height: [h + 'px', 0],
+    },
+    {
+      duration: 400,
+      easing: 'ease',
+    }
+  );
+  target.style.height = 0;
+}
+
 /* 通常操作
 ====================================================*/
 // メニュー開閉操作
@@ -162,14 +205,14 @@ sc.classList.add('selected');
 /*=========================================================
 　　　　　ページ読み込み
 =======================================================*/
-const loadArticle = (path1 = '', path2 = '') => {
+function loadArticle(path1 = '', path2 = '') {
   event.stopPropagation();
   const main_category = path1;
   const sub_category = path2;
   let href_path = `${manual_path + lang_value}/${main_category + sub_category}`;
   removeHash(); // ハッシュ削除
   location.pathname = href_path;
-};
+}
 
 /*=========================================================
 　　　　　スクロール関連

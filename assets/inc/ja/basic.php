@@ -28,8 +28,8 @@ $array = [
 
     // Discordアカウント連携
     $manual_path . "entry/acclink/" => [
-        "title" => "Discordアカウント連携" . " | " . $defaultManualTitle,
-        "desc" => "RainサーバーにおけるDiscordアカウントの連携方法についてご紹介します。"
+        "title" => "アカウント連携手順" . " | " . $defaultManualTitle,
+        "desc" => "Rainサーバーにおけるアカウントの連携手順についてご紹介します。"
     ],
 ];
 

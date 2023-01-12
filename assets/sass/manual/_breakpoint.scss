@@ -5,7 +5,7 @@
 　　　　　以下PC表示
 =======================================================*/
 
-@mixin pc {
+@include pc() {
     /* ヘッダー
 ====================================================*/
 
@@ -37,8 +37,8 @@
             // プラットフォーム
             .header_platform {
                 @include flex_center;
-                width: 5em;
-                height: 67px;
+                width: 70px;
+                aspect-ratio: 1 / 1;
                 padding-left: 1%;
             }
 
@@ -242,8 +242,22 @@
         width: 99.1vw;
         height: 33.6vw;
         background: url(#{$path_img}/common/bg_ribbon.webp) -14vw 32.3vw no-repeat,
-            url(#{$path_img}/common/bg.jpg) center top repeat-y;
+            url(#{$path_img}/common/bg.webp) center top repeat-y;
         background-size: auto 1.3vw, 100%;
+        z-index: -2;
+
+        // RainServerロゴ
+        &::before {
+            display: block;
+            position: absolute;
+            content: "";
+            background: url(#{$path_img}/common/rainserver_logo.webp) center center no-repeat;
+            background-size: 100%;
+            width: 22%;
+            aspect-ratio: 20 / 13;
+            top: 0;
+            left: 0;
+        }
 
         // トップページマニュアルタイトル
         &::after {
@@ -259,51 +273,26 @@
             z-index: 4;
         }
 
-        &:lang(ja) {
-            // MHFZZロゴ
-            &::before {
-                display: block;
-                position: absolute;
-                content: "";
-                background: url(#{$path_img}/ja/MHFZZ_logo.webp) center 1vw no-repeat;
-                background-size: 100%;
-                width: 25%;
-                height: 30%;
-                top: -1%;
-                left: -1%;
-                z-index: 3;
-            }
-        }
-
-        &:lang(en) {
-            // MHFZZロゴ
-            &::before {
-                display: block;
-                position: absolute;
-                content: "";
-                background: url(#{$path_img}/en/MHFZZ_logo.webp) center 1vw no-repeat;
-                background-size: 100%;
-                width: 25%;
-                height: 30%;
-                top: -1%;
-                left: -1%;
-                z-index: 3;
-            }
-        }
-
         // トップページ画像位置調整
-        .bg {
+        .top_img {
             width: 88.3%;
             @include right_left;
+            z-index: -1;
         }
     }
 
-    // サイドメニュー及びメインコンテンツ位置調整
-    .main_inner {
-        display: flex;
-        justify-content: space-between;
-        max-width: 1220px;
-        margin: 0 auto;
+    // サイドメニュー、メインコンテンツ位置調整及び背景画像設定
+    .bg {
+        background: url(#{$path_img}/common/body_bg.webp) center center repeat-y;
+        background-size: 100%;
+        z-index: -3;
+
+        .main_inner {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1220px;
+            margin: auto;
+        }
     }
 
     /* サイドメニュー
@@ -333,6 +322,47 @@
             width: 100%;
             height: 4px;
             background: #1ecbff;
+        }
+
+        // MHFZZロゴ
+        .logo {
+            position: relative;
+            padding: 1px 0;
+            background: url(#{$path_img}/common/bg_logo.webp) no-repeat center center;
+            background-size: 100%;
+            border-right: 1px solid #1ecbff;
+            border-left: 1px solid #1ecbff;
+
+            a {
+                display: block;
+                position: relative;
+                width: 100%;
+                aspect-ratio: 100 / 37;
+                margin: 20px 0;
+                color: #fff;
+                font-size: 1.6rem;
+                opacity: 1;
+                transition: -webkit-filter 0.3s;
+                transition: filter 0.3s;
+                transition: filter 0.3s, -webkit-filter 0.3s;
+
+                // 日本語ロゴ
+                &:lang(ja) {
+                    background: url(#{$path_img}/ja/MHFZZ_logo.webp) no-repeat center top;
+                    background-size: 100%;
+                }
+
+                // 英語ロゴ
+                &:lang(en) {
+                    background: url(#{$path_img}/en/MHFZZ_logo.webp) no-repeat center top;
+                    background-size: 100%;
+                }
+
+                &:hover {
+                    -webkit-filter: brightness(1.2);
+                    filter: brightness(1.2);
+                }
+            }
         }
 
         // サイドメニュー本体
@@ -482,7 +512,6 @@
                             background: #05162e;
                             margin: auto;
                             transition: all 0.3s ease-in-out;
-                            z-index: 5;
                         }
 
                         // 開閉マーク横線
@@ -500,7 +529,6 @@
                             margin: auto;
                             transform: rotate(90deg);
                             transition: all 0.3s ease-in-out;
-                            z-index: 6;
                         }
                     }
 
@@ -588,6 +616,7 @@
         margin: 10% 8% 0;
     }
 
+    // 画像とpタグセット時
     .itemset {
         margin: 0;
         margin-bottom: 5%;
@@ -643,6 +672,7 @@
         }
     }
 
+    // 記事内COMMENT及びCHECK
     .article_memo {
         position: relative;
         padding: 6.5% 2% 2%;
@@ -692,16 +722,37 @@
         width: 3.5%;
         height: 7%;
         border-radius: 50%;
-        transition: 0.3s;
+        transition: 0.5s;
         color: #00a6c4;
         background: #fff;
-        opacity: 0.8;
+        opacity: 0.7;
+
+        &::before {
+            content: "";
+            @include flex_center;
+            top: -90%;
+            width: 46%;
+            height: 30px;
+            background: url(#{$path_img}/common/backtotop_arrow.webp) center top no-repeat;
+            background-size: 100%;
+            transition: 0.5s;
+            opacity: 0.7;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
 
         // ホバー時明るく
         &:hover {
             box-shadow: 0 0 10px #00a6c4;
             opacity: 1;
         }
+    }
+
+    // SPボトムメニュー非表示
+    .bottom_navigations {
+        display: none;
     }
 
     /* 更新履歴
@@ -906,7 +957,7 @@
             .extlink_items_link {
                 display: block;
                 position: relative;
-                z-index: 3;
+                z-index: 2;
 
                 // タイトル左側マーク
                 &::before {
@@ -930,7 +981,7 @@
                     height: 15%;
                     left: auto;
                     right: 4%;
-                    z-index: 5;
+                    z-index: 6;
                 }
 
                 // 初心者ガイド
@@ -966,7 +1017,7 @@
                 // 外部フレーム
                 .extlink_frame {
                     position: relative;
-                    z-index: 4;
+                    z-index: 7;
                 }
 
                 // アイテム内部配置調整及び背景画像
@@ -983,7 +1034,7 @@
 
                     // アイテム内部テキスト調整
                     .extlink_text_content {
-                        z-index: 5;
+                        z-index: 8;
                         width: -webkit-fit-content;
                         width: -moz-fit-content;
                         width: fit-content;
@@ -1028,7 +1079,7 @@
 
         // フッターセクション余白調整
         .footer_link {
-            margin: 0 auto;
+            margin: auto;
             width: 90%;
             padding-top: 5%;
 
@@ -1115,16 +1166,15 @@
 /*=========================================================
 　　　　　以下SP表示
 =======================================================*/
-@mixin sp {
+@include sp() {
     /* ヘッダー
 ====================================================*/
-    /* ヘッダー帯 */
+
+    // ヘッダー帯
     header {
-        display: flex;
         background: #000;
         width: 100%;
-        justify-content: center;
-        align-items: center;
+        height: 70px;
         position: relative;
 
         // ヘッダー帯下部装飾
@@ -1132,140 +1182,197 @@
             display: block;
             content: "";
             position: absolute;
-            top: 17vw;
+            bottom: 0;
             width: 100%;
-            height: 1.5vw;
-            background: rgb(200, 200, 200);
-        }
-    }
-
-    /* ヘッダーロゴ */
-    .header_logo {
-        margin: 1% 31%;
-
-        a {
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            width: 38vw;
+            height: 0.6vw;
+            background: rgb(190, 193, 195);
         }
 
-        img {
-            height: 15vw;
-
-            // ロゴテキスト画像
-            &:nth-child(2) {
-                height: 10vw;
-                margin-left: 2%;
-            }
-        }
-    }
-
-    /* 本文
-====================================================*/
-    /* コンテンツ調整のため */
-    .wrapper {
-        min-height: auto;
-    }
-    /* 本文位置調整 */
-    .error_page {
-        display: flex;
-        justify-content: center;
-        flex: 1;
-        flex-direction: column;
-    }
-
-    /* 本文 */
-    .main {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 20vw 0;
-
-        // タイトル
-        h1 {
-            font-size: 2.2rem;
-            padding: 5% 3% 1%;
-
-            &:lang(en) {
-                font-size: 3.4rem;
-            }
-        }
-
-        // 内容
-        p {
-            text-align: center;
-            font-size: 1.4rem;
-            padding: 7%;
-
-            &:lang(en) {
-                font-size: 1.5rem;
-            }
-        }
-    }
-
-    /* コケ猫 */
-    .kokecat {
-        width: 70vw;
-    }
-
-    /* フッター
-====================================================*/
-    /* フッター帯 */
-    footer {
-        display: block;
-        position: relative;
-        background: #000;
-
-        // フッター帯上部装飾
-        &::before {
-            display: block;
-            content: "";
-            position: absolute;
+        // ヘッダー内部
+        .header_inner {
             width: 100%;
-            height: 1.5vw;
-            background: rgb(200, 200, 200);
-        }
+            height: 67px;
+            @include flex_center;
+            justify-content: space-between;
 
-        // フッター内コンテンツ調整
-        .footer_bar_contents {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-right: auto;
-            margin-left: auto;
-            padding: 4vw;
-
-            /* フッターロゴ */
-            .footer_logo {
-                a {
-                    display: block;
-                    line-height: 0;
-                }
+            // プラットフォーム
+            .header_platform {
+                @include flex_center;
+                width: 60px;
+                height: 40px;
+                padding-left: 1%;
 
                 img {
-                    height: 13vw;
-                    width: auto;
+                    width: 30px;
+                    aspect-ratio: 3 / 5;
                 }
+            }
+
+            // ヘッダーロゴ
+            .header_logo {
+                display: flex;
+                @include pos_center;
+
+                a {
+                    width: 100px;
+                    height: 60px;
+                    background: url(#{$path_img}/common/rain_textlogo.webp) center center no-repeat;
+                    background-size: 100%;
+                }
+            }
+
+            // ヘッダーメニュー(PC非表示)
+            .header_language {
+                display: none;
             }
         }
     }
 
-    /* フッターテキスト */
-    .footer_text {
-        line-height: 1.7;
-        padding: 4% 1% 0;
+    /* メインインナー
+====================================================*/
 
-        // テキスト調整
-        p {
-            color: white;
-            font-size: 1rem;
-            text-align: center;
+    // トップページ画像
+    .top_images {
+        position: relative;
+        width: 100%;
+        height: 70vw;
+        //background: url(#{$path_img}/common/bg_ribbon.webp) center 90vw repeat-x;
+        //background-size: auto 7px;
+        z-index: -2;
 
-            &:lang(en) {
-                font-size: 1.2rem;
-            }
+        // RainServerロゴ
+        &::before {
+            display: block;
+            position: absolute;
+            content: "";
+            background: url(#{$path_img}/common/rainserver_logo.webp) center center no-repeat;
+            background-size: 100%;
+            width: 35vw;
+            aspect-ratio: 20 / 13;
+            top: 0;
+            left: 1%;
         }
+
+        // トップページマニュアルタイトル
+        &::after {
+            display: block;
+            @include right_left;
+            top: auto;
+            bottom: 3%;
+            content: "";
+            background: url(#{$path_img}/common/manual_title.webp) no-repeat;
+            background-size: 100%;
+            width: 105%;
+            aspect-ratio: 63 / 10;
+            z-index: 4;
+        }
+
+        // トップページ画像位置調整
+        .top_img {
+            width: 100vw;
+            @include right_left;
+            top: -10%;
+            z-index: -1;
+        }
+    }
+
+    // サイドメニュー、メインコンテンツ位置調整及び背景画像設定
+    .bg {
+        background: url(#{$path_img}/common/bg_ribbon.webp) center top repeat-x,
+            url(#{$path_img}/common/body_bg.webp) center center repeat-y;
+        background-size: auto 8px, 100%;
+        padding-top: 8px;
+
+        .main_inner {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1220px;
+            margin: auto;
+        }
+    }
+
+    /* ボトムナビゲーション
+====================================================*/
+    ul.bottom_navigations {
+        position: fixed;
+        @include flex_center;
+        justify-content: space-around;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 43px; /*アイコン枠の高さ*/
+        margin: 0;
+        padding: 0;
+        background-color: white; /*背景色*/
+        border-top: 2px solid gray; /*バーの上線*/
+        border-bottom: 2px solid gray; /*バーの下線*/
+        z-index: 30;
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    ul.bottom_navigations li {
+        text-align: center;
+    }
+
+    .side_menu {
+        /*position:fixed;にし、z-indexの数値を大きくして前面へ*/
+        position: fixed;
+        z-index: 10;
+        /*ナビのスタート位置と形状*/
+        bottom: -120%;
+        left: 0;
+        width: 100%;
+        height: 100vh; /*ナビの高さ*/
+        background: #999;
+        /*動き*/
+        transition: all 0.6s;
+    }
+
+    /*アクティブクラスがついたら位置を0に*/
+    .side_menu.panelactive {
+        bottom: 0;
+    }
+
+    /*ナビゲーションの縦スクロール*/
+    .side_menu.panelactive .side_menu-list {
+        /*ナビの数が増えた場合縦スクロール*/
+        position: fixed;
+        z-index: 999;
+        width: 100%;
+        height: 100vh; /*表示する高さ*/
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /*ナビゲーション*/
+    .side_menu ul {
+        /*ナビゲーション天地中央揃え*/
+        position: absolute;
+        z-index: 999;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    /*リストのレイアウト設定*/
+
+    .side_menu li {
+        list-style: none;
+        text-align: center;
+    }
+
+    .side_menu li a {
+        color: #333;
+        text-decoration: none;
+        padding: 10px;
+        display: block;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: bold;
+    }
+
+    .fixed {
+        height: 100%;
+        overflow: hidden;
     }
 }

@@ -23,7 +23,7 @@
     <meta name="twitter:title" content="<?= $e403_title; ?>">
     <meta name="twitter:image:src" content="https://.com/manual/assets/img/common/share.webp">
     <!-- css -->
-    <link href="<?= $css_path . "style_errors.css"; ?>" rel="stylesheet" type="text/css">
+    <link href="/manual/assets/css/style_errors.css?t=<?= print date("Ymd", filemtime($_SERVER['DOCUMENT_ROOT'] . $css_path . "style_errors.css")); ?>" rel="stylesheet" type="text/css">
     <!-- font -->
     <?= $e403_font; ?>
 </head>

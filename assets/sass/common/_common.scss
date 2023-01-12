@@ -101,14 +101,14 @@ body {
     }
 }
 
-/* 画像初期設定 */
+// 画像初期設定
 img {
     width: 100%;
     height: auto;
     pointer-events: none;
 }
 
-/* aタグ装飾削除 */
+// aタグ装飾削除
 a {
     color: inherit;
     text-decoration: none;
@@ -125,7 +125,7 @@ a {
     }
 }
 
-/* ボタン装飾削除 */
+// ボタン装飾削除
 button{
         background-color: transparent;
         border: none;
@@ -137,12 +137,12 @@ button{
                 appearance: none;
 }
 
-/* カーソルポインター */
+// カーソルポインター
 .pointer {
     cursor: pointer;
 }
 
-/* タイトルフォント */
+// タイトルフォント
 h1,
 h2{
     font-family: $font_title_ja;

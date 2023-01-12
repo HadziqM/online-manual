@@ -9,22 +9,11 @@
 /* body */
 body {
     height: auto;
-    background: url(/manual/assets/img/common/body_bg.jpg) center center repeat-y;
-    background-size: 100%;
-    -webkit-text-size-adjust:100%;
+    -webkit-text-size-adjust: 100%;
 }
 
 /* wrapper初期設定 */
 .wrapper {
     width: 100%;
-}
-
-// 以下PC表示
-@media (min-width: 900px) {
-    @include pc;
-}
-
-// 以下モバイル表示
-@media (max-width: 899px) {
-    @include sp;
+    overflow: hidden;
 }

@@ -1,7 +1,8 @@
 <div class="header_inner">
-    <p class="header_platform">
-        <img src="/manual/assets/img/common/platform_pc.webp" alt="閲覧プラットフォーム">
-    </p>
+    <picture class="header_platform">
+        <source srcset="/manual/assets/img/common/platform_sp.webp" media="(max-width: 899px)" type="image/webp">
+        <img src="/manual/assets/img/common/platform_pc.webp" alt="pc">
+    </picture>
     <p class="header_logo">
         <a onclick="loadArticle()"></a>
     </p>

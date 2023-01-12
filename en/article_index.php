@@ -20,7 +20,11 @@
     <!-- <link rel="alternate" href="http://.com/en/" hreflang="en">
   <link rel="alternate" href="http://.com/ja/" hreflang="ja"> -->
     <!-- css -->
-    <link href="<?= $css_path . "style.css"; ?>" rel="stylesheet" type="text/css">
+    <link href="/manual/assets/css/style.css?t=<?= print date("Ymd", filemtime($_SERVER['DOCUMENT_ROOT'] . $css_path . "style.css")); ?>" rel="stylesheet" type="text/css">
+    <!-- js -->
+    <script src="<?= $js_path . "jquery-3.6.1.min.js"; ?>" defer></script>
+    <script src="<?= $js_path . "js.cookie.min.js"; ?>" defer></script>
+    <script src="/manual/assets/js/main.js?t=<?= print date("Ymd", filemtime($_SERVER['DOCUMENT_ROOT'] . $js_path . "main.js")); ?>" defer></script>
     <!-- font -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;800&family=Roboto:wght@400;700;900&display=swap');
@@ -37,30 +41,27 @@
             <?php require_once $_SERVER['DOCUMENT_ROOT'] . $inc_path . "en/header.php" ?>
         </header>
 
-        <main class="main_inner">
-            <nav class="side_menu">
-                <!-- menu -->
-                <?php require_once $_SERVER['DOCUMENT_ROOT'] . $inc_path . "en/menu.php" ?>
-            </nav>
+        <div class="bg">
+            <main class="main_inner">
+                <nav class="side_menu">
+                    <!-- menu -->
+                    <?php require_once $_SERVER['DOCUMENT_ROOT'] . $inc_path . "en/menu.php" ?>
+                </nav>
 
-            <article class="contents">
-                <!-- article -->
-                <?php require_once "./.php" ?>
-            </article>
-        </main>
+                <article class="contents">
+                    <!-- article -->
+                    <?php require_once "./.php" ?>
+                </article>
+            </main>
+        </div>
 
-        <div class="pagetop">▲</div>
+        <div class="pagetop"></div>
 
         <footer>
             <!-- footer -->
             <?php require_once $_SERVER['DOCUMENT_ROOT'] . $inc_path . "en/footer.php" ?>
         </footer>
     </div>
-    <!-- js -->
-    <script src="<?= $js_path . "jquery-3.6.1.min.js"; ?>"></script>
-    <script src="<?= $js_path . "import.js"; ?>"></script>
-    <script src="<?= $js_path . "main.js"; ?>"></script>
-    <script src="<?= $js_path . "js.cookie.min.js"; ?>"></script>
 </body>
 
 </html>

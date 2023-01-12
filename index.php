@@ -1,8 +1,7 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . "/manual/assets/inc/language_check.php" ?>
+require_once $_SERVER['DOCUMENT_ROOT'] . "/manual/assets/inc/language_check.php";
 
-<?php
-/* 転送設定 */
+// 転送設定
 if (isset($_COOKIE["lang"])) {
     if ($_COOKIE["lang"] === "ja") { //値にjaが入ってる時
         header("Location: ./ja"); //日本語サイトへ
@@ -16,4 +15,3 @@ if (isset($_COOKIE["lang"])) {
         header("Location: ./en"); //英語サイトへ
     }
 }
-?>

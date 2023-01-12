@@ -1,7 +1,7 @@
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . "/manual/assets/inc/ja/basic.php" ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . "/manual/assets/inc/en/basic.php" ?>
 
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -9,7 +9,7 @@
     <!-- info -->
     <title><?= $titleTxt; ?></title>
     <meta name="description" content="<?= $descTxt; ?>">
-    <meta name="keywords" content="モンスターハンター フロンティア 公式オンラインマニュアル, mhf, monster hunter frontier, オンラインゲーム">
+    <meta name="keywords" content="monster hunter frontier, official online manual, mhf, online game">
     <!-- favicon -->
     <link rel="icon" type="image/png" href="<?= $img_path . "common/favicon.ico"; ?>">
     <!-- mobile -->
@@ -27,8 +27,8 @@
     <script src="/manual/assets/js/main.js?t=<?= print date("Ymd", filemtime($_SERVER['DOCUMENT_ROOT'] . $js_path . "main.js")); ?>" defer></script>
     <!-- font -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Noto+Sans:wght@400;700;900&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;800&family=Roboto:wght@400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@400;700;900&display=swap');
     </style>
 
@@ -38,14 +38,14 @@
     <div class="wrapper">
         <header>
             <!-- header -->
-            <?php require_once $_SERVER['DOCUMENT_ROOT'] . $inc_path . "ja/header.php" ?>
+            <?php require_once $_SERVER['DOCUMENT_ROOT'] . $inc_path . "en/header.php" ?>
         </header>
 
         <div class="bg">
             <main class="main_inner">
                 <nav class="side_menu">
                     <!-- menu -->
-                    <?php require_once $_SERVER['DOCUMENT_ROOT'] . $inc_path . "ja/menu.php" ?>
+                    <?php require_once $_SERVER['DOCUMENT_ROOT'] . $inc_path . "en/menu.php" ?>
                 </nav>
 
                 <article class="contents">
@@ -59,7 +59,7 @@
 
         <footer>
             <!-- footer -->
-            <?php require_once $_SERVER['DOCUMENT_ROOT'] . $inc_path . "ja/footer.php" ?>
+            <?php require_once $_SERVER['DOCUMENT_ROOT'] . $inc_path . "en/footer.php" ?>
         </footer>
     </div>
 </body>
